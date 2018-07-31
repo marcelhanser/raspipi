@@ -1,0 +1,32 @@
+plugins {
+    id 'org.hidetake.ssh' version '2.9.0'
+}
+
+remotes {
+    webServer {
+        host = '192.168.1.127'
+        user = 'pi'
+        identity = file('C:\\Users\\Marcel\\ssh\\pi_rsa.txt')
+    }
+}
+
+ssh.settings {
+    knownHosts = allowAnyHosts
+}
+
+task deploy {
+    doLast {
+        ssh.settings {
+            knownHosts = allowAnyHosts
+        }
+
+        ssh.run {
+            session(remotes.webServer) {
+//                put from: 'example.war', into: '/webapps'
+//                execute 'sudo service tomcat restart'
+               def a =  execute 'ls'
+                println(a)
+            }
+        }
+    }
+}
