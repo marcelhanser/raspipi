@@ -18,7 +18,7 @@ class Displayer extends Component {
     }
 
     pull = () => {
-        const url = 'http://192.168.1.126:3000/api/post';
+        const url = '/api/post';
         setTimeout(() => {
             request
                 .get(url)

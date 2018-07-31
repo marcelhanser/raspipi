@@ -24,8 +24,7 @@ task deploy {
             session(remotes.webServer) {
 //                put from: 'example.war', into: '/webapps'
 //                execute 'sudo service tomcat restart'
-               def a =  execute 'ls'
-                println(a)
+                executeScript file('deploy.sh')
             }
         }
     }
