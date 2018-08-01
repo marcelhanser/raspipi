@@ -24,7 +24,7 @@ task remoteInstall {
     }
 }
 
-task remoteRestart {
+task remoteDeploy {
     doLast {
         ssh.run {
             session(remotes.webServer) {
