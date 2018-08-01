@@ -8,7 +8,7 @@ class Poster extends Component {
     constructor() {
         super();
         this.state = {
-            textToPost: ""
+            text: ""
         }
     }
 
@@ -31,26 +31,26 @@ class Poster extends Component {
     };
 
     handleChange = (event) => {
-        this.setState({textToPost: event.target.value});
+        this.setState({text: event.target.value});
     };
 
     render() {
         return (
-            <form onSubmit={this.handleSubmit}>
+            <div>
                 <label>
                     Name:
-                    <input type="text" value={this.state.textToPost} onChange={this.handleChange}/>
+                    <input type="text" value={this.state.text} onChange={this.handleChange}/>
                 </label>
 
-                <input type="color" id="head" name="color" onChange={(event) => {
-                    this.setState({background: event.target.value})
-                }}
-                       value={this.state.background}/>
-                <label htmlFor="head">Background Color</label>
+                {/*<input type="color" id="head" name="color" onChange={(event) => {*/}
+                    {/*this.setState({background: event.target.value})*/}
+                {/*}}*/}
+                       {/*value={this.state.background}/>*/}
+                {/*<label htmlFor="head">Background Color</label>*/}
 
-                <input type="submit" value="Submit"/>
+                <input type="submit" value="Submit" onClick={this.handleSubmit}/>
 
-            </form>
+            </div>
         );
     }
 }
