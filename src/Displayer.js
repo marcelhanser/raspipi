@@ -36,7 +36,7 @@ class Displayer extends Component {
                     })
                 });
             this.pull();
-        }, 2000);
+        }, 500);
     };
 
     render() {
