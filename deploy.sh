@@ -1,3 +1,5 @@
+#!/bin/sh
+
 cd ~/workspace/raspipi
 git pull
 killall node

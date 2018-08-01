@@ -14,17 +14,23 @@ ssh.settings {
     knownHosts = allowAnyHosts
 }
 
-task deploy {
+task remoteInstall {
     doLast {
-        ssh.settings {
-            knownHosts = allowAnyHosts
-        }
-
         ssh.run {
             session(remotes.webServer) {
-//                put from: 'example.war', into: '/webapps'
-//                execute 'sudo service tomcat restart'
-                executeScript file('deploy.sh')
+                println("${execute 'cd ~/workspace/raspipi && npm install'}")
+            }
+        }
+    }
+}
+
+task remoteRestart {
+    doLast {
+        ssh.run {
+            session(remotes.webServer) {
+                println("${execute 'cd ~/workspace/raspipi && git pull'}")
+                println("${execute 'sudo systemctl restart raspipi-server.service'}")
+                println("${execute 'sudo systemctl restart raspipi-frontend.service'}")
             }
         }
     }

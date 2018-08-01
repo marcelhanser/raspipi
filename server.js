@@ -2,7 +2,7 @@ var express = require('express');
 var app = express();
 
 
-var text = "Hier könnte Ihre Werbung stehen";
+var text = "Hier könnte Ihre Werbung stehen und zwar die neuste";
 var background = "red";
 
 app.use(function(req, res, next) {

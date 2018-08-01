@@ -46,7 +46,7 @@ class Poster extends Component {
                     this.setState({background: event.target.value})
                 }}
                        value={this.state.background}/>
-                <label htmlFor="head">Background</label>
+                <label htmlFor="head">Background Color</label>
 
                 <input type="submit" value="Submit"/>
 
