@@ -26,26 +26,24 @@ class Displayer extends Component {
                 .set('Accept', 'application/json')
                 .end((error, response) => {
                     console.log(response);
-                    const title = JSON.parse(response.text).text;
-                    const background = JSON.parse(response.text).background;
-                    console.log("Response " + JSON.stringify(title));
-                    console.log("Response " + JSON.stringify(background));
-
-                    this.setState({
-                        name: title
-                    })
+                    if(error ){
+                        return;
+                    }
+                    this.setState(JSON.parse(response.text));
                 });
             this.pull();
-        }, 500);
+        }, 1000);
     };
 
     render() {
+        const {background, fontcolor, text, giphy} = this.state;
         return (
             <div className="App">
 
-                <header className="App-header">
-                    <img src={logo} className="App-logo" alt="logo"/>
-                    <h1>{this.state.name}</h1>
+                <header className="App-header" style={{background, color: fontcolor}}>
+                    <img src={logo} className="App-logo" alt="logo" onClick={() => window.location="/poster"}/>
+                    <h1>{text}</h1>
+                    <iframe src={giphy} height={200} width={200} />
                 </header>
             </div>
 

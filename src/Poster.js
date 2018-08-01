@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import request from "superagent";
-
-// import './Poster.css';
+import './Poster.css';
+import GiphySelect from 'react-giphy-select';
+import 'react-giphy-select/lib/styles.css';
 
 class Poster extends Component {
 
@@ -13,7 +14,6 @@ class Poster extends Component {
     }
 
     handleSubmit = () => {
-
         const url = '/api/post';
         request
             .post(url)
@@ -25,6 +25,7 @@ class Poster extends Component {
                 }
                 else {
                     console.log("Response " + JSON.stringify(response.body));
+                    window.location = "/";
                 }
             })
 
@@ -34,22 +35,41 @@ class Poster extends Component {
         this.setState({text: event.target.value});
     };
 
+    onEntrySelect = (entry) => {
+        this.setState({giphy: entry.embed_url});
+    };
+
     render() {
         return (
-            <div>
-                <label>
-                    Name:
-                    <input type="text" value={this.state.text} onChange={this.handleChange}/>
-                </label>
+            <div className="Poster-Wrapper">
+                <div>
+                    <label>
+                        Name:
+                        <input type="text" value={this.state.text} onChange={this.handleChange}/>
+                    </label>
+                </div>
 
-                {/*<input type="color" id="head" name="color" onChange={(event) => {*/}
-                    {/*this.setState({background: event.target.value})*/}
-                {/*}}*/}
-                       {/*value={this.state.background}/>*/}
-                {/*<label htmlFor="head">Background Color</label>*/}
+                <div>
+                    <input type="color" id="color" name="color" onChange={(event) => {
+                        this.setState({background: event.target.value})
+                    }}
+                           value={this.state.background}/>
+                    <label htmlFor="color">Background Color</label>
+                </div>
+
+                <div>
+                    <input type="color" id="fontcolor" name="fontcolor" onChange={(event) => {
+                        this.setState({fontcolor: event.target.value})
+                    }}
+                           value={this.state.fontcolor}/>
+                    <label htmlFor="fontcolor">Font Color</label>
+                </div>
+
+                <div>
+                    <GiphySelect onEntrySelect={this.onEntrySelect}/>
+                </div>
 
                 <input type="submit" value="Submit" onClick={this.handleSubmit}/>
-
             </div>
         );
     }

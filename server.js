@@ -1,36 +1,44 @@
 var express = require('express');
 var app = express();
-
+const storage = require('node-persist');
 
 var text = "Hier könnte Ihre Werbung stehen und zwar die neuste";
-var background = "red";
+var background = "darkgreen";
+var fontcolor = "white";
 
-app.use(function(req, res, next) {
+const defaultMessage = {
+    text, background, fontcolor
+}
+
+storage.init();
+
+
+app.use((req, res, next) => {
     var allowedOrigins = ['192.168.1.126:3000', 'localhost:3000'];
     var origin = req.headers.origin;
-    if(allowedOrigins.indexOf(origin) > -1){
+    if (allowedOrigins.indexOf(origin) > -1) {
         res.setHeader('Access-Control-Allow-Origin', origin);
     }
     return next();
 });
 
 
-app.get('/api/post', function (req, res) {
+app.get('/api/post', async (req, res) => {
     console.log('GET /');
-    res.write(JSON.stringify({
-        "text": text,
-        "background" : background
-    }));
+    let message = await storage.getItem('message');
+    res.write(JSON.stringify(
+        message ? message : defaultMessage
+    ));
     res.end();
 });
 
-app.post('/api/post', function (req, res) {
+app.post('/api/post', (req, res) => {
     console.log('POST /');
+
     req.on('data', (chunk) => {
         console.log(JSON.parse(chunk));
-        text = JSON.parse(chunk).text;
-        background = JSON.parse(chunk).background;
-        // console.log(background);
+        let message = JSON.parse(chunk);
+        storage.setItem('message', message);
     });
 
     res.end('thanks');
