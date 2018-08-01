@@ -28,6 +28,7 @@ task remoteDeploy {
     doLast {
         ssh.run {
             session(remotes.webServer) {
+                println("${execute 'cd ~/workspace/raspipi && git reset --hard'}")
                 println("${execute 'cd ~/workspace/raspipi && git pull'}")
                 println("${execute 'sudo systemctl restart raspipi-server.service'}")
                 println("${execute 'sudo systemctl restart raspipi-frontend.service'}")
