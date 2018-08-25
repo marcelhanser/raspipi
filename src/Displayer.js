@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import request from 'superagent';
 import logo from './logo.svg';
+import train from './train.svg';
 import './App.css';
 
 class Displayer extends Component {
@@ -42,6 +43,7 @@ class Displayer extends Component {
 
                 <header className="App-header" style={{background, color: fontcolor}}>
                     <img src={logo} className="App-logo" alt="logo" onClick={() => window.location="/poster"}/>
+                    <img src={train} id="train" alt="train" onClick={() => window.location = "/zvv"}/>
                     <h1>{text}</h1>
                     <iframe src={giphy} height={200} />
                 </header>
