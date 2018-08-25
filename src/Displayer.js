@@ -43,7 +43,7 @@ class Displayer extends Component {
                 <header className="App-header" style={{background, color: fontcolor}}>
                     <img src={logo} className="App-logo" alt="logo" onClick={() => window.location="/poster"}/>
                     <h1>{text}</h1>
-                    <iframe src={giphy} height={200} width={200} />
+                    <iframe src={giphy} height={200} />
                 </header>
             </div>
 
