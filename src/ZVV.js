@@ -27,7 +27,7 @@ class ZVV extends Component {
         if (this.pollingActivated) {
             setTimeout(() => {
                 this.poll();
-            }, 10000);
+            }, 60000);
         }
     };
 
