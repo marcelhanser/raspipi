@@ -9,19 +9,26 @@ class ZVV extends Component {
     constructor() {
         super();
         this.state = {
-            text: ""
-        }
+            text: "",
+        };
+        this.pollingActivated = true;
     }
 
     componentDidMount() {
-        this.activatePolling();
+        this.poll();
     }
 
-    activatePolling = () => {
+    componentWillUnmount() {
+        this.pollingActivated = false;
+    }
+
+    poll = () => {
         this.callTimetableSuperService();
-        setTimeout(() => {
-            this.activatePolling();
-        }, 10000);
+        if (this.pollingActivated) {
+            setTimeout(() => {
+                this.poll();
+            }, 10000);
+        }
     };
 
     callTimetableSuperService = () => {
@@ -31,7 +38,6 @@ class ZVV extends Component {
             .query(null)
             .set('Accept', 'application/json')
             .end((error, response) => {
-                console.log(response);
                 if (error) {
                     return;
                 }
@@ -46,7 +52,7 @@ class ZVV extends Component {
     renderConnection = (connection) => {
         let departure = new Date(connection.from.departure);
         const isDelayed = !!connection.from.delay;
-        return <div className={'connection'} key={connection.from.departureTimestamp}>
+        return <div className={'connection'} key={'' + Math.random()}>
             Abfahrt &nbsp;
             <FormattedRelative
                 value={departure}/> <span
