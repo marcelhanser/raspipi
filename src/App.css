@@ -34,7 +34,7 @@ iframe {
     border: 0px;
 }
 
-#train {
+.turningIcon {
     height:60px;
     margin: 10px;
     animation: App-logo-spin infinite 5s linear;
