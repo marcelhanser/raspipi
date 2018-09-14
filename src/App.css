@@ -40,3 +40,10 @@ iframe {
     animation: App-logo-spin infinite 5s linear;
 
 }
+
+.notClickable {
+    position: absolute;
+    height: 219px;
+    width: 100vw;
+    margin-top: -220px;
+}

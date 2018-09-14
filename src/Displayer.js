@@ -27,7 +27,7 @@ class Displayer extends Component {
                 .set('Accept', 'application/json')
                 .end((error, response) => {
                     console.log(response);
-                    if(error ){
+                    if (error) {
                         return;
                     }
                     this.setState(JSON.parse(response.text));
@@ -42,10 +42,13 @@ class Displayer extends Component {
             <div className="App">
 
                 <header className="App-header" style={{background, color: fontcolor}}>
-                    <img src={logo} className="App-logo" alt="logo" onClick={() => window.location="/poster"}/>
+                    <img src={logo} className="App-logo" alt="logo" onClick={() => window.location = "/poster"}/>
                     <img src={train} id="train" alt="train" onClick={() => window.location = "/zvv"}/>
                     <h1>{text}</h1>
-                    <iframe src={giphy} height={200} />
+                    <div>
+                        <iframe src={giphy} height={200}/>
+                        <div className="notClickable"/>
+                    </div>
                 </header>
             </div>
 
