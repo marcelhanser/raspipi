@@ -6,6 +6,7 @@ import playButton from './images/play-button.svg';
 import pauseButton from './images/pause-button.svg';
 import './App.css';
 import Sentences from "./Sentences";
+import SonosVoiceManagement from './SpeechInput';
 
 class Displayer extends Component {
 
@@ -24,7 +25,7 @@ class Displayer extends Component {
     pull = () => {
         const url = '/api/post';
         setTimeout(() => {
-                request
+            request
                 .get(url)
                 .query(null)
                 .set('Accept', 'application/json')
@@ -65,6 +66,7 @@ class Displayer extends Component {
                         <iframe src={giphy} height={200}/>
                         <div className="notClickable"/>
                     </div>
+                    <SonosVoiceManagement/>
                     <Sentences/>
                 </div>
             </div>
