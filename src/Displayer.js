@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
 import request from 'superagent';
-import logo from './logo.svg';
-import train from './train.svg';
-import playButton from './play-button.svg';
-import pauseButton from './pause-button.svg';
+import logo from './images/logo.svg';
+import train from './images/train.svg';
+import playButton from './images/play-button.svg';
+import pauseButton from './images/pause-button.svg';
 import './App.css';
+import Sentences from "./Sentences";
 
 class Displayer extends Component {
 
@@ -23,7 +24,7 @@ class Displayer extends Component {
     pull = () => {
         const url = '/api/post';
         setTimeout(() => {
-            request
+                request
                 .get(url)
                 .query(null)
                 .set('Accept', 'application/json')
@@ -51,19 +52,21 @@ class Displayer extends Component {
     render() {
         const {background, fontcolor, text, giphy} = this.state;
         return (
-            <div className="App">
-
+            <div>
                 <header className="App-header" style={{background, color: fontcolor}}>
                     <img src={logo} className="App-logo" alt="logo" onClick={() => window.location = "/poster"}/>
                     <img src={train} className="turningIcon" alt="train" onClick={() => window.location = "/zvv"}/>
                     <img src={playButton} className="turningIcon" onClick={this.sonosPlay}/>
                     <img src={pauseButton} className="turningIcon" onClick={this.sonosPause}/>
+                </header>
+                <div id="body" style={{background}}>
                     <h1>{text}</h1>
                     <div>
                         <iframe src={giphy} height={200}/>
                         <div className="notClickable"/>
                     </div>
-                </header>
+                    <Sentences/>
+                </div>
             </div>
 
         );

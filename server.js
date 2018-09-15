@@ -1,5 +1,8 @@
 var express = require('express');
 var app = express();
+var superagent = require('superagent');
+const jsdom = require("jsdom");
+const {JSDOM} = jsdom;
 const storage = require('node-persist');
 
 var text = "Hier könnte Ihre Werbung stehen und zwar die neuste";
@@ -42,6 +45,39 @@ app.post('/api/post', (req, res) => {
     });
 
     res.end('thanks');
+});
+
+app.get('/api/getSentence', (req, res) => {
+    console.log('get Sentence /');
+    function getRandomNumber() {
+        return Math.floor(Math.random() * Math.floor(50));
+    }
+    const url = "http://www.smartphrase.com/cgi-bin/randomphrase.cgi?german&humorous&normal&" + getRandomNumber() + "&" + getRandomNumber() + "&" + getRandomNumber() + "&" + getRandomNumber() + "&" + getRandomNumber() + "&" + getRandomNumber();
+    console.log(url);
+    superagent
+        .get(url)
+        .query(null)
+        .set('Accept', 'Accept: text/html')
+        .end((error, response) => {
+            if (error) {
+                return;
+            }
+            const dom = new JSDOM(response.res.text);
+            const randomText = (dom.window.document.body.querySelectorAll("td")[6].textContent);
+            let text;
+            if (randomText.indexOf("!") > 0) {
+                text = randomText.split("!")[0];
+            }
+            else if (randomText.indexOf("?") > 0) {
+                text = randomText.split("?")[0];
+            }
+            else if (randomText.indexOf(".") > 0) {
+                text = randomText.split(".")[0];
+            }
+            res.write(JSON.stringify({randomSentence: text}));
+            res.end();
+        });
+
 });
 
 port = 8080;

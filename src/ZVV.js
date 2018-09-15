@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import './ZVV.css';
 import request from "superagent";
 import {FormattedRelative, FormattedTime} from "react-intl";
-import logo from './logo.svg';
+import logo from './images/logo.svg';
 
 class ZVV extends Component {
 

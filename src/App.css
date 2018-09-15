@@ -1,5 +1,6 @@
 .App {
     text-align: center;
+    height: 100vh;
 }
 
 .App-logo {
@@ -9,8 +10,8 @@
 
 .App-header {
     background-color: #222;
-    height: 100vh;
     color: white;
+    height: 100px;
 }
 
 .App-title {
@@ -46,4 +47,22 @@ iframe {
     height: 219px;
     width: 100vw;
     margin-top: -220px;
+}
+
+#body {
+    margin-top: 0px;
+    height: calc(100vh - 100px);
+
+}
+
+h1 {
+    margin-top: 0px;
+}
+#musicButtons {
+    position: absolute;
+    left: 20px;
+    top: 150px;
+    height: 200px;
+    width: 50px;
+
 }
