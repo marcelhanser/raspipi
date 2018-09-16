@@ -1,6 +1,6 @@
 import request from "superagent";
 
-const sonosUrl = 'http://localhost:5005/';
+const sonosUrl = '/api/sonos/';
 
 export const playInRoom = (room) => {
     callAction(room, 'play');

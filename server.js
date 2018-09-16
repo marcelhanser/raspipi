@@ -91,8 +91,8 @@ app.get('/api/sonos/*', (req, res) => {
         .get(sonosUrl)
         .end((error, response) => {
             if (error) {
-                res.write("Sonos Problem:" + JSON.stringify(response.body));
-                res.status(response.status);
+                res.write("Sonos Problem:" + JSON.stringify(error.body));
+                res.status(error.status);
                 res.end();
             } else {
                 res.write(JSON.stringify(response.text));
