@@ -11,7 +11,7 @@ var fontcolor = "white";
 
 const defaultMessage = {
     text, background, fontcolor
-}
+};
 
 storage.init();
 
@@ -24,7 +24,6 @@ app.use((req, res, next) => {
     }
     return next();
 });
-
 
 app.get('/api/post', async (req, res) => {
     console.log('GET /');
@@ -47,11 +46,13 @@ app.post('/api/post', (req, res) => {
     res.end('thanks');
 });
 
-app.get('/api/getSentence', (req, res) => {
+app.get('/api/random-sentence', (req, res) => {
     console.log('get Sentence /');
+
     function getRandomNumber() {
         return Math.floor(Math.random() * Math.floor(50));
     }
+
     const url = "http://www.smartphrase.com/cgi-bin/randomphrase.cgi?german&humorous&normal&" + getRandomNumber() + "&" + getRandomNumber() + "&" + getRandomNumber() + "&" + getRandomNumber() + "&" + getRandomNumber() + "&" + getRandomNumber();
     console.log(url);
     superagent
@@ -80,6 +81,26 @@ app.get('/api/getSentence', (req, res) => {
 
 });
 
+app.get('/api/sonos/*', (req, res) => {
+    const sonosCall = req.url.replace('/api/sonos', '');
+    const sonosUrl = 'http://localhost:5005' + sonosCall;
+
+    console.log("Sonos call: " + sonosUrl);
+
+    superagent
+        .get(sonosUrl)
+        .end((error, response) => {
+            if (error) {
+                res.write("Sonos Problem:" + JSON.stringify(response.body));
+                res.status(response.status);
+                res.end();
+            } else {
+                res.write(JSON.stringify(response.text));
+                res.end();
+            }
+        });
+});
+
 port = 8080;
 app.listen(port);
-console.log('Listening at http://localhost:' + port)
+console.log('Listening at http://localhost:' + port);

@@ -41,12 +41,12 @@ class Displayer extends Component {
     };
 
     sonosPlay = () => {
-        const url = 'http://localhost:5005/wohnzimmer/play';
+        const url = '/api/sonos/wohnzimmer/play';
         request.get(url).end();
     };
 
     sonosPause = () => {
-        const url = 'http://localhost:5005/wohnzimmer/pause';
+        const url = '/api/sonos/wohnzimmer/pause';
         request.get(url).end();
     };
 
