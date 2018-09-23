@@ -32,7 +32,7 @@ class ZVV extends Component {
     };
 
     callTimetableSuperService = () => {
-        const url = 'http://transport.opendata.ch/v1/connections?from=Zürich+Manegg&to=Z%C3%BCrich+HB&limit=4&datetime=';
+        const url = 'https://transport.opendata.ch/v1/connections?from=Zürich+Manegg&to=Z%C3%BCrich+HB&limit=4&datetime=';
         request
             .get(url)
             .query(null)

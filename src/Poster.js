@@ -3,6 +3,9 @@ import request from "superagent";
 import './Poster.css';
 import GiphySelect from 'react-giphy-select';
 import 'react-giphy-select/lib/styles.css';
+import Button from '@material-ui/core/Button';
+import TextField from "@material-ui/core/TextField/TextField";
+import Grid from "@material-ui/core/Grid/Grid";
 
 class Poster extends Component {
 
@@ -41,36 +44,24 @@ class Poster extends Component {
 
     render() {
         return (
-            <div className="Poster-Wrapper">
-                <div>
-                    <label>
-                        Name:
-                        <input type="text" value={this.state.text} onChange={this.handleChange}/>
-                    </label>
-                </div>
-
-                <div>
-                    <input type="color" id="color" name="color" onChange={(event) => {
-                        this.setState({background: event.target.value})
-                    }}
-                           value={this.state.background}/>
-                    <label htmlFor="color">Background Color</label>
-                </div>
-
-                <div>
-                    <input type="color" id="fontcolor" name="fontcolor" onChange={(event) => {
-                        this.setState({fontcolor: event.target.value})
-                    }}
-                           value={this.state.fontcolor}/>
-                    <label htmlFor="fontcolor">Font Color</label>
-                </div>
-
-                <div>
-                    <GiphySelect onEntrySelect={this.onEntrySelect}/>
-                </div>
-
-                <input type="submit" value="Submit" onClick={this.handleSubmit}/>
-            </div>
+            <Grid className="Grid-Root" container direction="column" alignItems="center">
+                <Grid item xs={12}>
+                    <TextField
+                        id="standard-name"
+                        label="Diine Text"
+                        value={this.state.text}
+                        onChange={this.handleChange}
+                        fullWidth
+                        margin="normal"
+                    />
+                    <Grid>
+                        <GiphySelect onEntrySelect={this.onEntrySelect}/>
+                    </Grid>
+                    <br/>
+                    <Button variant="contained" color="primary" onClick={this.handleSubmit}>Submit
+                    </Button>
+                </Grid>
+            </Grid>
         );
     }
 }

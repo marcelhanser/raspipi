@@ -1,12 +1,8 @@
 import React, {Component} from 'react';
 import request from 'superagent';
-import logo from './images/logo.svg';
-import train from './images/train.svg';
-import playButton from './images/play-button.svg';
-import pauseButton from './images/pause-button.svg';
 import './App.css';
-import Sentences from "./Sentences";
-import SonosVoiceManagement from './SpeechInput';
+import Typography from "@material-ui/core/Typography/Typography";
+import Paper from "@material-ui/core/Paper/Paper";
 
 class Displayer extends Component {
 
@@ -18,7 +14,6 @@ class Displayer extends Component {
     }
 
     componentDidMount() {
-        console.log('componentDidMount');
         this.pull();
     }
 
@@ -40,37 +35,18 @@ class Displayer extends Component {
         }, 1000);
     };
 
-    sonosPlay = () => {
-        const url = '/api/sonos/wohnzimmer/play';
-        request.get(url).end();
-    };
-
-    sonosPause = () => {
-        const url = '/api/sonos/wohnzimmer/pause';
-        request.get(url).end();
-    };
-
     render() {
-        const {background, fontcolor, text, giphy} = this.state;
+        const {text, giphy} = this.state;
         return (
-            <div>
-                <header className="App-header" style={{background, color: fontcolor}}>
-                    <img src={logo} className="App-logo" alt="logo" onClick={() => window.location = "/poster"}/>
-                    <img src={train} className="turningIcon" alt="train" onClick={() => window.location = "/zvv"}/>
-                    <img src={playButton} className="turningIcon" onClick={this.sonosPlay}/>
-                    <img src={pauseButton} className="turningIcon" onClick={this.sonosPause}/>
-                </header>
-                <div id="body" style={{background}}>
-                    <h1>{text}</h1>
+            <div id="body">
+                <Paper>
+                    <Typography variant="headline">{text}</Typography>
                     <div>
                         <iframe src={giphy} height={200}/>
                         <div className="notClickable"/>
                     </div>
-                    <SonosVoiceManagement/>
-                    <Sentences/>
-                </div>
+                </Paper>
             </div>
-
         );
     }
 }

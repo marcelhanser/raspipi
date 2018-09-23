@@ -1,5 +1,4 @@
-.Poster-Wrapper {
-    background: black;
-    color: white;
-    height: 100vh;
+
+.Grid-Root{
+    flexGrow: 1
 }

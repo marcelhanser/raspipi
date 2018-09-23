@@ -6,11 +6,9 @@ const {JSDOM} = jsdom;
 const storage = require('node-persist');
 
 var text = "Hier könnte Ihre Werbung stehen und zwar die neuste";
-var background = "darkgreen";
-var fontcolor = "white";
 
 const defaultMessage = {
-    text, background, fontcolor
+    text
 };
 
 storage.init();
@@ -100,6 +98,29 @@ app.get('/api/sonos/*', (req, res) => {
             }
         });
 });
+
+app.get('/api/paraworld', (req, res) => {
+    const url = 'https://www.paraworld.ch/gleitschirm-schule-zentralschweiz';
+
+    console.log("get Paraworld");
+    console.log(url);
+    superagent
+        .get(url)
+        .end((error, response) => {
+            if (error) {
+                console.log(error);
+                // res.status(error.status);
+                res.end();
+            } else {
+                const dom = new JSDOM(response.res.text);
+                const paraInfo = dom.window.document.body.getElementsByClassName("content pusher")[0].textContent;
+                res.write(JSON.stringify({paraInfo: paraInfo}));
+                res.end();
+            }
+        });
+});
+
+
 
 port = 8080;
 app.listen(port);
