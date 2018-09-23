@@ -3,7 +3,6 @@ import './App.css';
 import request from 'superagent';
 import randomSentence from './images/random-sentence.svg';
 
-
 class Sentences extends Component {
 
     constructor() {
@@ -29,7 +28,7 @@ class Sentences extends Component {
     };
 
     playTextSonos = (text) =>{
-        const url = '/api/sonos/wohnzimmer/say/'+encodeURIComponent(text);
+        const url = '/api/sonos/wohnzimmer/say/'+encodeURIComponent(text)+ '/de';
         request.get(url).end();
     };
 
